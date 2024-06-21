@@ -10,7 +10,11 @@ repositories {
 }
 
 dependencies {
+    //Spring Context
+    implementation('org.springframework:spring-context:6.1.6')
 
+    //Spring AspectJ
+    implementation('org.springframework:spring-aspects:6.1.6')
 }
 
 test {
