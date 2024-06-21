@@ -13,9 +13,14 @@ public class GetNameLoggingAspect {
 //    System.out.println("getName() method is called");
 //  }
 
-  @Before("execution(public * get*(..))")
+  @Before("execution(public * get*())")
   private void logGetters() {
     System.out.println("Getter method is called");
+  }
+
+  @Before("execution(public * get*())")
+  private void logGettersAdditional() {
+    System.out.println("Getter method is called (Additional advice)");
   }
 
 }
