@@ -15,6 +15,9 @@ public class FirstAspectApp {
     writer.think();
     writer.findTool();
     writer.write();
+
+    System.out.println("Poem: " + writer.getPoem().getName());
+    System.out.println("Writing tool: " + writer.getWritingTool().getName());
   }
 
 }

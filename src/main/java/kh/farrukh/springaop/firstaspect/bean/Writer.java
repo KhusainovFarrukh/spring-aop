@@ -25,4 +25,12 @@ public class Writer {
     System.out.println("Writing poem " + poem.getName() + " with " + writingTool.getName());
   }
 
+  public Poem getPoem() {
+    return poem;
+  }
+
+  public WritingTool getWritingTool() {
+    return writingTool;
+  }
+
 }
