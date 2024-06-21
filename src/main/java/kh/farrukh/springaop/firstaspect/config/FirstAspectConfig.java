@@ -5,8 +5,10 @@ import kh.farrukh.springaop.firstaspect.bean.WritingTool;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
+@EnableAspectJAutoProxy
 @ComponentScan("kh.farrukh.springaop.firstaspect")
 public class FirstAspectConfig {
 
