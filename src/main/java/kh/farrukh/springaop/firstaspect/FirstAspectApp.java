@@ -11,6 +11,8 @@ public class FirstAspectApp {
 
     var writer = context.getBean(Writer.class);
     writer.think();
+    writer.findTool();
+    writer.write();
   }
 
 }

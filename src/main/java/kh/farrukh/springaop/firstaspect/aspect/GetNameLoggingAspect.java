@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetNameLoggingAspect {
 
-  @Before("execution(public String getName())")
+  @Before("execution(public String kh.farrukh.springaop.firstaspect.bean.Poem.getName())")
   private void logGetName() {
     System.out.println("getName() method is called");
   }
