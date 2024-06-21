@@ -2,6 +2,7 @@ package kh.farrukh.springaop.firstaspect.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -13,14 +14,18 @@ public class GetNameLoggingAspect {
 //    System.out.println("getName() method is called");
 //  }
 
-  @Before("execution(public * get*())")
+  @Before("getterMethods()")
   private void logGetters() {
     System.out.println("Getter method is called");
   }
 
-  @Before("execution(public * get*())")
+  @Before("getterMethods()")
   private void logGettersAdditional() {
     System.out.println("Getter method is called (Additional advice)");
+  }
+
+  @Pointcut("execution(public * get*())")
+  private void getterMethods() {
   }
 
 }
