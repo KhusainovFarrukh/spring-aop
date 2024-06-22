@@ -1,5 +1,6 @@
 package kh.farrukh.springaop.customcache;
 
+import kh.farrukh.springaop.customcache.cache.CacheAspect;
 import kh.farrukh.springaop.customcache.config.CustomCacheAppConfig;
 import kh.farrukh.springaop.customcache.service.DeviceService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,6 +16,10 @@ public class CustomCacheApp {
       deviceService.printPhone("Samsung", "Galaxy S" + i % 2);
       deviceService.printLaptop("MacBook Pro");
     }
+
+   context.getBean(CacheAspect.class).getCache().forEach((key, value) -> {
+      System.out.println(key + " -> " + value);
+    });
   }
 
 }
