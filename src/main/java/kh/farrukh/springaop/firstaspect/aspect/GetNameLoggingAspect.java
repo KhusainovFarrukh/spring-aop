@@ -1,8 +1,10 @@
 package kh.farrukh.springaop.firstaspect.aspect;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
@@ -41,14 +43,32 @@ public class GetNameLoggingAspect {
 //    System.out.println("SetAndGetCall call with value=" + str);
 //  }
 
-  @AfterThrowing(value = "strArgMethodsWithinBean(str)", argNames = "str,ex", throwing = "ex")
-  private void logStrArgMethodsWithinBean(String str, RuntimeException ex) {
-    System.out.println("SetAndGetCall exception=" + ex + " with value=" + str);
-  }
+//  @AfterThrowing(value = "strArgMethodsWithinBean(str)", argNames = "str,ex", throwing = "ex")
+//  private void logStrArgMethodsWithinBean(String str, RuntimeException ex) {
+//    System.out.println("SetAndGetCall exception=" + ex + " with value=" + str);
+//  }
+//
+//  @AfterReturning(value = "strArgMethodsWithinBean(str)", argNames = "str,out", returning = "out")
+//  private void logStrArgMethodsWithinBean(String str, String out) {
+//    System.out.println("SetAndGetCall return=" + out + " with value=" + str);
+//  }
 
-  @AfterReturning(value = "strArgMethodsWithinBean(str)", argNames = "str,out", returning = "out")
-  private void logStrArgMethodsWithinBean(String str, String out) {
-    System.out.println("SetAndGetCall return=" + out + " with value=" + str);
+  @Around(value = "strArgMethodsWithinBean(String)", argNames = "joinPoint")
+  private Object logStrArgMethodsWithinBean(ProceedingJoinPoint joinPoint) {
+    System.out.println("Before advice");
+
+    Object result;
+    try {
+      result = joinPoint.proceed() + " {from around}";
+      System.out.println("After returning advice");
+    } catch (Throwable e) {
+      System.out.println("After throwing advice");
+      throw new RuntimeException(e);
+    }
+
+    System.out.println("After advice");
+
+    return result;
   }
 
   @Pointcut(value = "strArgMethods(str) && withinBean()", argNames = "str")
