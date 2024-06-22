@@ -14,18 +14,31 @@ public class GetNameLoggingAspect {
 //    System.out.println("getName() method is called");
 //  }
 
-  @Before("getterMethods()")
-  private void logGetters() {
-    System.out.println("Getter method is called");
-  }
+//  @Before("getterMethods()")
+//  private void logGetters() {
+//    System.out.println("Getter method is called");
+//  }
 
-  @Before("getterMethods()")
-  private void logGettersAdditional() {
-    System.out.println("Getter method is called (Additional advice)");
+//  @Before("getterMethods()")
+//  private void logGettersAdditional() {
+//    System.out.println("Getter method is called (Additional advice)");
+//  }
+
+  @Before("poemGetters()")
+  private void logPoemGetters() {
+    System.out.println("Poem getter method is called");
   }
 
   @Pointcut("execution(public * get*())")
   private void getterMethods() {
+  }
+
+  @Pointcut("within(kh.farrukh.springaop.firstaspect.bean.Poem)")
+  private void withinPoem() {
+  }
+
+  @Pointcut("withinPoem() && getterMethods()")
+  private void poemGetters() {
   }
 
 }
