@@ -1,5 +1,6 @@
 package kh.farrukh.springaop.firstaspect.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -25,8 +26,8 @@ public class GetNameLoggingAspect {
 //  }
 
   @Before("poemGetters()")
-  private void logPoemGetters() {
-    System.out.println("Poem getter method is called");
+  private void logPoemGetters(JoinPoint joinPoint) {
+    System.out.println(joinPoint.toShortString() + " is called on object " + joinPoint.getTarget());
   }
 
   @Pointcut("execution(public * get*())")
