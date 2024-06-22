@@ -17,4 +17,10 @@ public class Poem {
     System.out.println("Poem name is set to " + name);
   }
 
+  public String setAndGetName(String name) {
+    this.name = name + " (modified)";
+    System.out.println("Poem name is set to " + this.name + " and returned");
+    return this.name;
+  }
+
 }

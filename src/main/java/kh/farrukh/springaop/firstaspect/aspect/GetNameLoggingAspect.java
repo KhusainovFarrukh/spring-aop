@@ -1,5 +1,6 @@
 package kh.farrukh.springaop.firstaspect.aspect;
 
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -29,9 +30,14 @@ public class GetNameLoggingAspect {
 //    System.out.println(joinPoint.toShortString() + " is called on object " + joinPoint.getTarget());
 //  }
 
-  @Before(value = "strArgMethodsWithinBean(str)", argNames = "str")
+//  @Before(value = "strArgMethodsWithinBean(str)", argNames = "str")
+//  private void logStrArgMethodsWithinBean(String str) {
+//    System.out.println("Setter call with value=" + str);
+//  }
+
+  @After(value = "strArgMethodsWithinBean(str)", argNames = "str")
   private void logStrArgMethodsWithinBean(String str) {
-    System.out.println("Setter call with value=" + str);
+    System.out.println("SetAndGetCall call with value=" + str);
   }
 
   @Pointcut(value = "strArgMethods(str) && withinBean()", argNames = "str")

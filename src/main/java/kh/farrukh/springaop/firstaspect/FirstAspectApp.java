@@ -18,7 +18,7 @@ public class FirstAspectApp {
 
 //    System.out.println("Poem: " + writer.getPoem().getName());
 //    System.out.println("Writing tool: " + writer.getWritingTool().getName());
-    writer.getPoem().setName("New poem");
+    writer.getPoem().setAndGetName("New poem");
 //    writer.getWritingTool().setName("New writing tool");
   }
 
