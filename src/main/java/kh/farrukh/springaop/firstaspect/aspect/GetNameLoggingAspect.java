@@ -1,6 +1,5 @@
 package kh.farrukh.springaop.firstaspect.aspect;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -25,9 +24,26 @@ public class GetNameLoggingAspect {
 //    System.out.println("Getter method is called (Additional advice)");
 //  }
 
-  @Before("poemGetters()")
-  private void logPoemGetters(JoinPoint joinPoint) {
-    System.out.println(joinPoint.toShortString() + " is called on object " + joinPoint.getTarget());
+//  @Before("poemGetters()")
+//  private void logPoemGetters(JoinPoint joinPoint) {
+//    System.out.println(joinPoint.toShortString() + " is called on object " + joinPoint.getTarget());
+//  }
+
+  @Before(value = "strArgMethodsWithinBean(str)", argNames = "str")
+  private void logStrArgMethodsWithinBean(String str) {
+    System.out.println("Setter call with value=" + str);
+  }
+
+  @Pointcut(value = "strArgMethods(str) && withinBean()", argNames = "str")
+  private void strArgMethodsWithinBean(String str) {
+  }
+
+  @Pointcut("args(str)")
+  private void strArgMethods(String str) {
+  }
+
+  @Pointcut("within(kh.farrukh.springaop.firstaspect.bean..*)")
+  private void withinBean() {
   }
 
   @Pointcut("execution(public * get*())")
