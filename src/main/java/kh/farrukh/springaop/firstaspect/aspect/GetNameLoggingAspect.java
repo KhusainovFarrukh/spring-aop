@@ -1,8 +1,9 @@
 package kh.farrukh.springaop.firstaspect.aspect;
 
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
@@ -35,9 +36,19 @@ public class GetNameLoggingAspect {
 //    System.out.println("Setter call with value=" + str);
 //  }
 
-  @After(value = "strArgMethodsWithinBean(str)", argNames = "str")
-  private void logStrArgMethodsWithinBean(String str) {
-    System.out.println("SetAndGetCall call with value=" + str);
+//  @After(value = "strArgMethodsWithinBean(str)", argNames = "str")
+//  private void logStrArgMethodsWithinBean(String str) {
+//    System.out.println("SetAndGetCall call with value=" + str);
+//  }
+
+  @AfterThrowing(value = "strArgMethodsWithinBean(str)", argNames = "str,ex", throwing = "ex")
+  private void logStrArgMethodsWithinBean(String str, RuntimeException ex) {
+    System.out.println("SetAndGetCall exception=" + ex + " with value=" + str);
+  }
+
+  @AfterReturning(value = "strArgMethodsWithinBean(str)", argNames = "str,out", returning = "out")
+  private void logStrArgMethodsWithinBean(String str, String out) {
+    System.out.println("SetAndGetCall return=" + out + " with value=" + str);
   }
 
   @Pointcut(value = "strArgMethods(str) && withinBean()", argNames = "str")

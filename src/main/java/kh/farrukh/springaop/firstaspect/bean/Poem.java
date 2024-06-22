@@ -20,6 +20,7 @@ public class Poem {
   public String setAndGetName(String name) {
     this.name = name + " (modified)";
     System.out.println("Poem name is set to " + this.name + " and returned");
+//    throw new RuntimeException("Modification exception");
     return this.name;
   }
 
