@@ -16,22 +16,23 @@ public class CacheAspect {
 
   @Around("cacheAnnotation()")
   public Object cache(ProceedingJoinPoint joinPoint) {
-    var returnType = joinPoint.getSignature().getDeclaringTypeName();
+    var className = joinPoint.getSignature().getDeclaringTypeName();
     var methodName = joinPoint.getSignature().getName();
     var args = joinPoint.getArgs();
-    var key = new StringBuilder();
-    key.append(returnType).append(".").append(methodName);
+    var keyBuilder = new StringBuilder();
+    keyBuilder.append(className).append(".").append(methodName);
     for (var arg : args) {
-      key.append(".").append(arg);
+      keyBuilder.append(".").append(arg);
     }
+    var key = keyBuilder.toString();
 
-    if (cache.containsKey(key.toString())) {
-      return cache.get(key.toString());
+    if (cache.containsKey(key)) {
+      return cache.get(key);
     }
 
     try {
       var result = joinPoint.proceed();
-      cache.put(key.toString(), result);
+      cache.put(key, result);
       return result;
     } catch (Throwable throwable) {
       throw new RuntimeException(throwable);
