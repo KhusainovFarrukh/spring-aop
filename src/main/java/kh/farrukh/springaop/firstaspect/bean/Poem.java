@@ -14,6 +14,7 @@ public class Poem {
 
   public void setName(String name) {
     this.name = name;
+    System.out.println("Poem name is set to " + name);
   }
 
 }
