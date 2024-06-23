@@ -13,8 +13,11 @@ dependencies {
     //Spring Context
     implementation('org.springframework:spring-context:6.1.6')
 
-    //Spring AspectJ
-    implementation('org.springframework:spring-aspects:6.1.6')
+    //Spring AOP
+    implementation('org.springframework:spring-aop:6.1.6')
+
+    //AspectJ
+    implementation('org.aspectj:aspectjweaver:1.9.22')
 }
 
 test {
